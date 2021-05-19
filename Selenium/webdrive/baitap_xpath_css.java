@@ -14,174 +14,173 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class baitap_xpath_css {
 	WebDriver driver;
-@BeforeClass
+	String firstName, midleName, lastName, email,actual;
+
+	@BeforeClass
 	public void beforeClass() {
-	
-		// mo  web browser 
+
+		// mo web browser
 		driver = new FirefoxDriver();
-		
-		// mo to man hinh web browser 
+		// cho cho tim element 30s ( cho tat ca element)
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		// mo to man hinh web browser
 		driver.manage().window().maximize();
+
+
+	}
+
+//@Test
+	public void TC_01() throws InterruptedException {
+
+		// mo trang web test
+		driver.get("http://live.demoguru99.com/");
+
+		// click vao my account
+		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
+
+		// click vao login
+		driver.findElement(By.id("send2")).click();
+
+		// verify
+		Assert.assertEquals(driver.findElement(By.id("advice-required-entry-email")).getText(),
+				"This is a required field.");
+
+		Assert.assertEquals(driver.findElement(By.id("advice-required-entry-pass")).getText(),
+				"This is a required field.");
+
+	}
+
+//@Test
+//Login with invalid email
+	public void TC_02() throws InterruptedException {
+
+		// mo trang web test
+		driver.get("http://live.demoguru99.com/");
+
+		// click vao my account
+		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
+
+		// nhap email+ pass invalid
+		driver.findElement(By.id("email")).sendKeys("21321312@12321312.1232131");
+
+		driver.findElement(By.id("pass")).sendKeys("123456");
+
+		// click vao login
+		driver.findElement(By.id("send2")).click();
+
+		// verify
+		Assert.assertEquals(driver.findElement(By.id("advice-validate-email-email")).getText(),
+				"Please enter a valid email address. For example johndoe@domain.com.");
+
+	}
+
+//@Test
+//Login with invalid email
+	public void TC_03() throws InterruptedException {
+		// mo trang web test
+		driver.get("http://live.demoguru99.com/");
+
+		// click vao my account
+		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
+
+		// nhap email+ pass invalid
+		driver.findElement(By.id("email")).sendKeys("automation@gmail.com");
+
+		driver.findElement(By.id("pass")).sendKeys("123");
+
+		// click vao login
+		driver.findElement(By.id("send2")).click();
+
+		// verify
+		Assert.assertEquals(driver.findElement(By.id("advice-validate-password-pass")).getText(),
+				"Please enter 6 or more characters without leading or trailing spaces.");
+
+	}
+
+//@Test
+//Login with invalid email
+	public void TC_04() throws InterruptedException {
+		// mo trang web test
+		driver.get("http://live.demoguru99.com/");
+
+		// click vao my account
+		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
+
+		// nhap email+ pass invalid
+		driver.findElement(By.id("email")).sendKeys("automation@gmail.com");
+
+		driver.findElement(By.id("pass")).sendKeys("123456");
+
+		// click vao login
+		driver.findElement(By.id("send2")).click();
+
+		// verify
+		Assert.assertEquals(driver.findElement(By.xpath("//span[text()='Invalid login or password.']")).getText(),
+				"Invalid login or password.");
+
+	}
+
+	@Test
+	public void TC_05() throws InterruptedException {
+		// create new account
+		// mo trang web
+		// Random rd = new Random();
+		// int number1 = rd.nextInt(4000);
+
+		driver.get("http://live.demoguru99.com/");
+
+		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
+
+		driver.findElement(By.xpath("//span[contains(text(),'Create')]")).click();
+
+		driver.findElement(By.id("firstname")).sendKeys("toai");
+
+		driver.findElement(By.id("middlename")).sendKeys("anh");
+
+		driver.findElement(By.id("lastname")).sendKeys("phan");
+
+		email = "toaiphan" + rd() + "@gmail.com";
+		driver.findElement(By.id("email_address")).sendKeys(email);
+		System.out.println(email);
+
+		driver.findElement(By.id("password")).sendKeys("123456");
+
+		driver.findElement(By.id("confirmation")).sendKeys("123456");
+
+		driver.findElement(By.xpath("//button[@title='Register']")).click();
+
+		String sussess = driver
+				.findElement(By.xpath("//span[text()='Thank you for registering with Main Website Store.']")).getText();
+		Assert.assertEquals(sussess, "Thank you for registering with Main Website Store.");
+
+		// step 7 verify fisrtname,lastname,email
+		firstName = driver.findElement(By.xpath("//p[contains(.,'Change Password')]")).getText();
+		System.out.println(firstName);
 		
-		 //chờ trong khoản 10s để tìm kiếm element o lenh tiep theo
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-		   
-		  
-  }
+		actual = "toai anh phan\n"+email+"\n"+"Change Password";
+		System.out.println(actual);
+		Assert.assertEquals(actual, firstName);
+		
+//		toai anh phan
+//		toaiphan3032@gmail.com
+//		Change Password
 
-//@Test
-//	public void TC_01() throws InterruptedException {
-//		
-//		// mo trang web test
-//		driver.get("http://live.demoguru99.com/");
-//		Thread.sleep(2000);
-//		
-//	    // click vao my account
-//		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
-//		Thread.sleep(2000);
-//		// click vao login
-//		driver.findElement(By.id("send2")).click();
-//		Thread.sleep(2000);
-//		//verify 
-//		Assert.assertEquals(driver.findElement(By.id("advice-required-entry-email")).getText(),"This is a required field.");
-//		Thread.sleep(2000);
-//		Assert.assertEquals(driver.findElement(By.id("advice-required-entry-pass")).getText(),"This is a required field.");
-//		Thread.sleep(2000);
-//  }
-//@Test
-////Login with invalid email
-//public void TC_02() throws InterruptedException {
-//	
-//	// mo trang web test
-//	driver.get("http://live.demoguru99.com/");
-//	Thread.sleep(2000);
-//	
-//    // click vao my account
-//	driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
-//	Thread.sleep(2000);
-//	
-//	// nhap email+ pass invalid
-//	driver.findElement(By.id("email")).sendKeys("21321312@12321312.1232131");
-//	Thread.sleep(2000);
-//	driver.findElement(By.id("pass")).sendKeys("123456");
-//	Thread.sleep(2000);
-//	
-//	// click vao login
-//	driver.findElement(By.id("send2")).click();
-//	Thread.sleep(2000);
-//	
-//	//verify 
-//	Assert.assertEquals(driver.findElement(By.id("advice-validate-email-email")).getText(),"Please enter a valid email address. For example johndoe@domain.com.");
-//	Thread.sleep(2000);
-//  
-//}
-//
-//@Test
-////Login with invalid email
-//public void TC_03() throws InterruptedException {
-//	// mo trang web test
-//		driver.get("http://live.demoguru99.com/");
-//		Thread.sleep(2000);
-//		
-//	    // click vao my account
-//		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
-//		Thread.sleep(2000);
-//		
-//		// nhap email+ pass invalid
-//		driver.findElement(By.id("email")).sendKeys("automation@gmail.com");
-//		Thread.sleep(2000);
-//		driver.findElement(By.id("pass")).sendKeys("123");
-//		Thread.sleep(2000);
-//		
-//		// click vao login
-//		driver.findElement(By.id("send2")).click();
-//		Thread.sleep(2000);
-//		
-//		//verify 
-//		Assert.assertEquals(driver.findElement(By.id("advice-validate-password-pass")).getText(),"Please enter 6 or more characters without leading or trailing spaces.");
-//		Thread.sleep(2000);
-	
-//}
- 
-//@Test
-////Login with invalid email
-//public void TC_04() throws InterruptedException {
-//	// mo trang web test
-//			driver.get("http://live.demoguru99.com/");
-//			Thread.sleep(2000);
-//			
-//		    // click vao my account
-//			driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
-//			Thread.sleep(2000);
-//			
-//			// nhap email+ pass invalid
-//			driver.findElement(By.id("email")).sendKeys("automation@gmail.com");
-//			Thread.sleep(2000);
-//			driver.findElement(By.id("pass")).sendKeys("123456");
-//			Thread.sleep(2000);
-//			
-//			// click vao login
-//			driver.findElement(By.id("send2")).click();
-//			Thread.sleep(2000);
-//			
-//			//verify 
-//			Assert.assertEquals(driver.findElement(By.xpath("//span[text()='Invalid login or password.']")).getText(),"Invalid login or password.");
-//			Thread.sleep(2000);
-//		
-//	
-//}
-@Test
-public void TC_05() throws InterruptedException {
-	// create new account
-	// mo trang web
-	//Random rd = new Random();
-    //int number1 = rd.nextInt(4000);
-    
-	driver.get("http://live.demoguru99.com/");
-	Thread.sleep(2000);
-	driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
-	Thread.sleep(2000);
-	driver.findElement(By.xpath("//span[contains(text(),'Create')]")).click();	
-	Thread.sleep(2000);
-	driver.findElement(By.id("firstname")).sendKeys("toai");
-	Thread.sleep(2000);
-	driver.findElement(By.id("middlename")).sendKeys("anh");
-	Thread.sleep(2000);
-	driver.findElement(By.id("lastname")).sendKeys("phan");
-	Thread.sleep(2000);
-	
-	driver.findElement(By.id("email_address")).sendKeys("toaiphan"+ rd() +"@gmail.com");
-	Thread.sleep(2000);
-	driver.findElement(By.id("password")).sendKeys("123456");
-	Thread.sleep(2000);
-	driver.findElement(By.id("confirmation")).sendKeys("123456");
-	Thread.sleep(2000);
-	driver.findElement(By.xpath("//button[@title='Register']")).click();
-	Thread.sleep(2000);
-	
-	String sussess = driver.findElement(By.xpath("//span[text()='Thank you for registering with Main Website Store.']")).getText();
-	Assert.assertEquals(sussess,"Thank you for registering with Main Website Store.");
-	Thread.sleep(2000);
-	
-	
-}
+	}
 
-
-@AfterClass
+	@AfterClass
 	public void afterClass() {
-	  
-	  
-	  
-  }
+
+	}
+
 //public int randomNumber() {
 //	Random rand = new Random();
 //	return rand.nextInt(9999);
 //}
-public int rd() {
-    // Tạo mới 1 đối tượng Random
-    // sử dụng từ khóa new
-    Random rd = new Random();
-    int randomx = rd.nextInt(4000);
-    return randomx;
-}
+	public int rd() {
+		// Tạo mới 1 đối tượng Random
+		// sử dụng từ khóa new
+		Random rd = new Random();
+		int randomx = rd.nextInt(4000);
+		return randomx;
+	}
 }
