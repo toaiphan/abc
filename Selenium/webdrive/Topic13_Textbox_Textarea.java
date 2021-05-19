@@ -20,8 +20,10 @@ public class Topic13_Textbox_Textarea {
 	String userIDValue, password, loginPageURL, customerID;
 	// tao ra 1 bo du lieu de su dung
 	String name, dateOfBirth, address, city, state, pin, phone, email, gender;
+	String editAddress, editCity, editState, editPin, editPhone, editEmail;
 	// khai bao element o day, de co the dung chung tao customer moi va edit
 	By customerNameTextbox = By.name("name");
+	By genderTextbox = By.name("gender");
 	By dateOfBirthTextbox = By.name("dob");
 	By addressTextArea = By.name("addr");
 	By cityTextbox = By.name("city");
@@ -39,7 +41,7 @@ public class Topic13_Textbox_Textarea {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		// Mo maximize cua so firefox
 		driver.manage().window().maximize();
-		// tao bo du lieu
+		// tao bo du lieu - new customer
 		name = "toai phan";
 		gender = "male";
 		dateOfBirth = "1995-08-06";
@@ -51,6 +53,14 @@ public class Topic13_Textbox_Textarea {
 		// su dung ham random de tao cac email khac nhau
 		email = "toaiphan" + randomNumber() + "@gmail.com";
 
+		// tao bo du lieu - edit customer
+		editAddress = "59 DinhThon\nMyDinh\nHaNoi2";
+		editCity = "Hanoi2";
+		editState = "VietNam2";
+		editPin = "235698";
+		editPhone = "03427842322";
+		// su dung ham random de tao cac email khac nhau
+		editEmail = "toaiphan2" + randomNumber() + "@gmail.com";
 		// mo URL ben duoi
 		driver.get("http://demo.guru99.com/v4");
 		// gan URL vao 1 loginPage URL de khi URL thay doi se khong phai sua code
@@ -124,7 +134,7 @@ public class Topic13_Textbox_Textarea {
 				phone);
 		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText(),
 				email);
-		//get customer ID
+		// get customer ID
 		customerID = driver.findElement(By.xpath("//td[text()='Customer ID']/following-sibling::td")).getText();
 	}
 
@@ -133,12 +143,63 @@ public class Topic13_Textbox_Textarea {
 		// click to Edit Customer
 
 		driver.findElement(By.xpath("//a[text()='Edit Customer']")).click();
-		//Input to customer ID text box
+		// Input to customer ID text box
 		driver.findElement(By.name("cusid")).sendKeys(customerID);
-		//click submit
+		// click submit
 		driver.findElement(By.name("AccSubmit")).click();
-		
-		//1h38 [Online 16] - Topic 13 (Handle Textbox/ TextArea)
+
+		// 1h38 [Online 16] - Topic 13 (Handle Textbox/ TextArea)
+		// verify edit customer form info matching with new customer info
+		Assert.assertEquals(driver.findElement(customerNameTextbox).getAttribute("value"), name);
+		Assert.assertEquals(driver.findElement(genderTextbox).getAttribute("value"), gender);
+		Assert.assertEquals(driver.findElement(dateOfBirthTextbox).getAttribute("value"), dateOfBirth);
+		Assert.assertEquals(driver.findElement(addressTextArea).getText(), address);
+		Assert.assertEquals(driver.findElement(cityTextbox).getAttribute("value"), city);
+		Assert.assertEquals(driver.findElement(stateTextbox).getAttribute("value"), state);
+		Assert.assertEquals(driver.findElement(pinTextbox).getAttribute("value"), pin);
+		Assert.assertEquals(driver.findElement(phoneTextbox).getAttribute("value"), phone);
+		Assert.assertEquals(driver.findElement(emailTextbox).getAttribute("value"), email);
+		// verify Name,gender,DOB disable
+		Assert.assertFalse(driver.findElement(customerNameTextbox).isEnabled());
+		Assert.assertFalse(driver.findElement(genderTextbox).isEnabled());
+		Assert.assertFalse(driver.findElement(dateOfBirthTextbox).isEnabled());
+		// edit data o edit customer form
+		driver.findElement(addressTextArea).clear();
+		driver.findElement(addressTextArea).sendKeys(editAddress);
+		driver.findElement(cityTextbox).clear();
+		driver.findElement(cityTextbox).sendKeys(editCity);
+		driver.findElement(stateTextbox).clear();
+		driver.findElement(stateTextbox).sendKeys(editState);
+		driver.findElement(pinTextbox).clear();
+		driver.findElement(pinTextbox).sendKeys(editPin);
+		driver.findElement(phoneTextbox).clear();
+		driver.findElement(phoneTextbox).sendKeys(editPhone);
+		driver.findElement(emailTextbox).clear();
+		driver.findElement(emailTextbox).sendKeys(editEmail);
+		// Click to submit button
+		driver.findElement(By.name("sub")).click();
+		// verify da tao khach hang moi thanh cong
+		Assert.assertEquals(driver.findElement(By.className("heading3")).getText(),
+				"Customer details updated Successfully!!!");
+
+		// verify data input voi data server tra ve
+		Assert.assertEquals(
+				driver.findElement(By.xpath("//td[text()='Customer Name']/following-sibling::td")).getText(), name);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Gender']/following-sibling::td")).getText(),
+				gender);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Birthdate']/following-sibling::td")).getText(),
+				dateOfBirth);
+		// do du lieu output ko xuong dong, nen can chuyen address ve ko xuong dong
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Address']/following-sibling::td")).getText(),
+				editAddress.replace("\n", " "));
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='City']/following-sibling::td")).getText(), editCity);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='State']/following-sibling::td")).getText(),
+				editState);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Pin']/following-sibling::td")).getText(), editPin);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Mobile No.']/following-sibling::td")).getText(),
+				editPhone);
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Email']/following-sibling::td")).getText(),
+				editEmail);
 
 	}
 
@@ -152,5 +213,5 @@ public class Topic13_Textbox_Textarea {
 		Random rand = new Random();
 		return rand.nextInt(9999);
 	}
-
+//done
 }

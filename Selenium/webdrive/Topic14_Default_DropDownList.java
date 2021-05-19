@@ -132,9 +132,7 @@ public class Topic14_Default_DropDownList {
 			select.deselectAll();
 			optionSelected = select.getAllSelectedOptions().size();
 			Assert.assertEquals(optionSelected, 0);
-
 		}
-
 	}
 
 // ham nay de xu ly exception. neu pass thi sleep x giay, neu sai thi giu lai exception, chu ko stop cac testcase sau
@@ -149,5 +147,6 @@ public class Topic14_Default_DropDownList {
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
+		//done
 	}
 }
