@@ -14,7 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class Baigiai_02_Textbox_Textarea {
+public class Topic13_Textbox_Textarea {
 	WebDriver driver;
 	// khai bao userIDValue, password de cho TC_02 co the su dung lai dc
 	// khai bao loginPageURL de khi URL thay doi chi thay doi 1 lan URL o dau tien
