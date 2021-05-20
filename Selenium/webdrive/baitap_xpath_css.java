@@ -180,7 +180,7 @@ public class baitap_xpath_css {
 		driver.findElement(By.id("pass")).sendKeys("123456");
 		// click vao login
 		driver.findElement(By.id("send2")).click();
-		//verify
+		//verify selenium ko ho tro , can lam theo video, 
 		Assert.assertEquals(driver.findElement(By.xpath("//h1[text()='My Dashboard']")).getText(), "MY DASHBOARD");
 		Assert.assertEquals(driver.findElement(By.xpath("//strong[contains(text(),'toai')] ")).getText(), "Hello, toai anh phan!");
 		System.out.println(driver.findElement(By.xpath("//a[text()='Change Password']/parent::p/text()[1]")).getText());
