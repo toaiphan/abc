@@ -14,7 +14,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class baitap_xpath_css {
 	WebDriver driver;
-	String firstName, midleName, lastName, email,actual;
+	String firstName, midleName, lastName, email, actual;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -25,7 +25,6 @@ public class baitap_xpath_css {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		// mo to man hinh web browser
 		driver.manage().window().maximize();
-
 
 	}
 
@@ -156,20 +155,44 @@ public class baitap_xpath_css {
 		// step 7 verify fisrtname,lastname,email
 		firstName = driver.findElement(By.xpath("//p[contains(.,'Change Password')]")).getText();
 		System.out.println(firstName);
-		
-		actual = "toai anh phan\n"+email+"\n"+"Change Password";
+
+		actual = "toai anh phan\n" + email + "\n" + "Change Password";
 		System.out.println(actual);
 		Assert.assertEquals(actual, firstName);
+		// STEP 8 LOGout khoi he thong
+		driver.findElement(By.xpath("//span[text()='Account']")).click();
+		driver.findElement(By.xpath("//a[@title='Log Out']")).click();
+		System.out.println(driver.findElement(By.xpath("//div[@class='page-title']/child::h2")).getText());
+		Assert.assertEquals(driver.findElement(By.xpath("//div[@class='page-title']/child::h2")).getText(),
+				"THIS IS DEMO SITE FOR   ");
 		
-//		toai anh phan
-//		toaiphan3032@gmail.com
-//		Change Password
 
+	}
+
+	@Test
+	public void TC_06() {
+		driver.get("http://live.demoguru99.com/");
+
+		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
+		// nhap email+ pass invalid
+		driver.findElement(By.id("email")).sendKeys(email);
+
+		driver.findElement(By.id("pass")).sendKeys("123456");
+		// click vao login
+		driver.findElement(By.id("send2")).click();
+		//verify
+		Assert.assertEquals(driver.findElement(By.xpath("//h1[text()='My Dashboard']")).getText(), "MY DASHBOARD");
+		Assert.assertEquals(driver.findElement(By.xpath("//strong[contains(text(),'toai')] ")).getText(), "Hello, toai anh phan!");
+		System.out.println(driver.findElement(By.xpath("//a[text()='Change Password']/parent::p/text()[1]")).getText());
+		System.out.println(driver.findElement(By.xpath("//a[text()='Change Password']/parent::p/text()[2]")).getText());
+		//Assert.assertEquals(driver.findElement(By.xpath("//a[text()='Change Password']/parent::p/text()[1]")).getText(), "toai anh phan");
+		//Assert.assertEquals(driver.findElement(By.xpath("//a[text()='Change Password']/parent::p/text()[2]")).getText(), "toaiphan@gmail.com");
+		
 	}
 
 	@AfterClass
 	public void afterClass() {
-
+		driver.quit();
 	}
 
 //public int randomNumber() {

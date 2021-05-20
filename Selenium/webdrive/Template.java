@@ -18,8 +18,6 @@ import org.testng.annotations.AfterClass;
 
 public class Template {
 	WebDriver driver;
-// lam viec voi default dropdown  can khai bai select
-	Select select;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -28,7 +26,7 @@ public class Template {
 		driver.manage().window().maximize();
 	}
 
-//	@Test
+	@Test
 	public void TC_01_() {
 		driver.get("");
 	}
