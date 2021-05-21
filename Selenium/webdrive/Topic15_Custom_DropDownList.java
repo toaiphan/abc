@@ -55,34 +55,36 @@ public class Topic15_Custom_DropDownList {
 
 	}
 
-@Test
-public void TC_02_Angular(){
-driver.get("https://bit.ly/2UV2vYi");
-selectItemInDropdown("//ejs-dropdownlist[@id='games')]//span[contains@class,'e-search-icon')]","//ul[@id='games_options']/li","Basketball");
+	@Test
+	public void TC_02_Angular() {
+		driver.get("https://bit.ly/2UV2vYi");
+		selectItemInDropdown("//ejs-dropdownlist[@id='games')]//span[contains@class,'e-search-icon')]",
+				"//ul[@id='games_options']/li", "Basketball");
 //verify bang ham tu viet
-Assert.assertEquals(getHiddenText("select[id='games_hidden'] option"),"Basketball");
+		Assert.assertEquals(getHiddenText("select[id='games_hidden'] option"), "Basketball");
 
+	}
 
-}
-
-@Test
+	@Test
 //freelancer trang upwork,xem trang web dung cong nghe go wappalyzer
-public void TC_03_React(){
-driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
-selectItemInDropdown("//i[@class='dropdown icon']","//span[@class='text']","Justen Kitsune");
+	public void TC_03_React() {
+		driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
+		selectItemInDropdown("//i[@class='dropdown icon']", "//span[@class='text']", "Justen Kitsune");
 //verify 
-Assert.assertTrue(driver.findElement(By.xpath("//div[@role='listbox']/div[@class='text' and text()='Justen Kitsune']")).isDisplayed());
+		Assert.assertTrue(
+				driver.findElement(By.xpath("//div[@role='listbox']/div[@class='text' and text()='Justen Kitsune']"))
+						.isDisplayed());
 
+	}
 
-}
-
-@Test
+	@Test
 //freelancer trang upwork,xem trang web dung cong nghe go wappalyzer
-public void TC_04_Edittable(){
-driver.get("https://indrimuska.github.io/jquery-editable-select/");
-sendkeyToEditDropdown("//div[@id='default-place']/input","Ford");
-Assert.assertEquals(getHiddenText("#default-place li.es-visible"),"Ford");
-}
+	public void TC_04_Edittable() {
+		driver.get("https://indrimuska.github.io/jquery-editable-select/");
+		sendkeyToEditDropdown("//div[@id='default-place']/input", "Ford");
+		Assert.assertEquals(getHiddenText("#default-place li.es-visible"), "Ford");
+	}
+
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
@@ -99,41 +101,40 @@ Assert.assertEquals(getHiddenText("#default-place li.es-visible"),"Ford");
 	}
 
 // do angular dropdown bi an nen ca viet ham get ra
-public String getHiddenText(String cssLocator){
-return (String) jsExcutor.executeScript("return document.querySelector(\""+cssLocator+"\").text");
+	public String getHiddenText(String cssLocator) {
+		return (String) jsExcutor.executeScript("return document.querySelector(\"" + cssLocator + "\").text");
 
-
-}
+	}
 
 // ham xu ly ham nay dung di dung lai nhieu lan, chi can truyen vao gia tri
-public void selectItemInDropdown(String parentLocator,String itemLocator,String expectedItem){
+	public void selectItemInDropdown(String parentLocator, String itemLocator, String expectedItem) {
 // 1.click vao 1 the bat ki de xo ra het cac item trong dropdown
-driver.findElement(By.xpath(parentLocator)).click();
-sleepInSecond(1);
+		driver.findElement(By.xpath(parentLocator)).click();
+		sleepInSecond(1);
 
 //2. cho cho tat ca cac item co trong HTML DOM( ko can visible)
-explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(itemLocator)));
+		explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(itemLocator)));
 //3. lay het tat ca cac item nay dua vao 1 list element
-List<WebElement> allItems= driver.findElements(By.xpath(itemLocator));
+		List<WebElement> allItems = driver.findElements(By.xpath(itemLocator));
 //4. duyet qua tung item
-for(WebElement item : allItems){
+		for (WebElement item : allItems) {
 //5. moi lan duyet qua kiem tra xem text cua item do co bang voi item minh can click hay khong
-String actualItem = item.getText();
+			String actualItem = item.getText();
 //neu nhu ma bang thi thoat khoi khong duyet nua
 //neu nhu khong bang thi duyet tiep cho den het tat ca item
-if (actualItem.equals(expectedItem)){
+			if (actualItem.equals(expectedItem)) {
 //truoc khi click thi scroll den element
-jsExcutor.executeScript("arguments[0].scrollIntoView(true);",item);
-sleepInSecond(2);
+				jsExcutor.executeScript("arguments[0].scrollIntoView(true);", item);
+				sleepInSecond(2);
 //wait cho element click able
-explicitWait.until(ExpectedConditions.elementToBeClickable(item));
-item.click();
-sleepInSecond(2);
-break;
-}
-}
+				explicitWait.until(ExpectedConditions.elementToBeClickable(item));
+				item.click();
+				sleepInSecond(2);
+				break;
+			}
+		}
 
-}
+	}
 
 // ham nay de xu ly exception. neu pass thi sleep x giay, neu sai thi giu lai exception, chu ko stop cac testcase sau
 	public void sleepInSecond(long time) {
