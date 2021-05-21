@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class baitap_xpath_css {
+public class Baitap_Topic12_Xpath_CSS {
 	WebDriver driver;
 	String firstName, midleName, lastName, email, actual;
 
