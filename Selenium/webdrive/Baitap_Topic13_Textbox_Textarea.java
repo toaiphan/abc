@@ -21,6 +21,7 @@ import org.testng.annotations.AfterClass;
 public class Baitap_Topic13_Textbox_Textarea {
 	WebDriver driver;
 	String email;
+	String CID;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -55,6 +56,48 @@ public class Baitap_Topic13_Textbox_Textarea {
 		driver.findElement(By.xpath("//input[@type='submit']")).click();
 		
 		sleepInSecond(10);
+		
+		
+	// Get thong tin sau khi new customer va verify
+		CID = driver.findElement(By.xpath("//td[text() = 'Customer ID']//following-sibling:: td")).getText();
+		
+	
+		
+		System.out.println(driver.findElement(By.xpath("//td[text() = 'Customer ID']//following-sibling:: td")).getText());
+		
+		Assert.assertEquals(driver.findElement(By.xpath("//td[text() = 'Customer Name']//following-sibling:: td")).getText(), "phan anh toai");
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Gender')]//following-sibling::td")).getText(), "female");
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(),'Birthdate')]//following-sibling::td")).getText(), "1995-06-08");
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(), 'Address')]//following-sibling::td")).getText(), "59 Dinh thon");
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(), 'City')]//following-sibling::td")).getText(), "ha noi");
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(), 'State')]//following-sibling::td")).getText(), "viet nam");
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(), 'Pin')]//following-sibling::td")).getText(), "123456");
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(), 'Mobile No.')]//following-sibling::td")).getText(), "0342787575");
+		Assert.assertEquals(driver.findElement(By.xpath("//td[contains(text(), 'Email')]//following-sibling::td")).getText(), email);
+		
+	// Chon Edit Customer
+		
+		driver.findElement(By.xpath("//a[contains(text(),'Edit Customer')]")).click();
+		
+	// Dien customer id
+		
+		
+		driver.findElement(By.name("cusid")).sendKeys(CID);
+		
+	//click submit
+		driver.findElement(By.name("AccSubmit")).click();
+		
+	// lay name 
+		driver.findElement(By.name("name")).getAttribute("value");
+		
+	// lay add
+		driver.findElement(By.name("addr")).getText();
+		
+	// Verify name
+		
+		Assert.assertEquals(driver.findElement(By.name("name")).getAttribute("value"), "phan anh toai");
+		Assert.assertEquals(driver.findElement(By.name("addr")).getText(), "59 Dinh thon");
+		
 		
 		
 		
