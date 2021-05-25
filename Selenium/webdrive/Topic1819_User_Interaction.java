@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class Topic18_User_Interaction{
+public class Topic1819_User_Interaction {
 	WebDriver driver;
 	Actions action;
 	WebElement element;
@@ -106,7 +106,7 @@ public class Topic18_User_Interaction{
 
 	}
 
-	//@Test
+	// @Test
 
 	// click dup
 	public void TC_04_Double_Click() {
@@ -122,39 +122,68 @@ public class Topic18_User_Interaction{
 		sleepInSecond(5);
 	}
 
-	
-	@Test
+	// @Test
 	public void TC_05_Right_Click() {
 		// mo trang test
 		driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
-		
+
 		// lay element de click chuot phai
 		element = driver.findElement(By.xpath("//span[text()='right click me']"));
-		
+
 		// click chuot phai
 		action.contextClick(element).perform();
-		
-		//hover to quit
+
+		// hover to quit
 		element = driver.findElement(By.xpath("//span[text()='Quit']//parent::li"));
 		action.moveToElement(element).perform();
-		
-		//verify quit co them hover/visible status
-		String quitClassAttribute = element.getAttribute("class");	
-		
+
+		// verify quit co them hover/visible status
+		String quitClassAttribute = element.getAttribute("class");
+
 		System.out.println(quitClassAttribute);
-		
+
 		Assert.assertTrue(quitClassAttribute.contains("context-menu-visible"));
 		Assert.assertTrue(quitClassAttribute.contains("context-menu-hover"));
 		// hoac co the verify bang isdisplay nhu vi du tren
-		
-		
-		
-		
-		
-		
+
+		sleepInSecond(5);
+	}
+
+	// nhung chuc nang khong nen lam auto :captcha( kiem tra nguoi dung
+	// that),OCR(nhan dien hinh anh- bien so xe,khuon mat),SMS,OTP,...QR
+	// CODE,BARCODE,bieu do: chart,canvas,flash,flex
+	// => khi nao co nhieu tgian moi lam, set do uu tien thap vi lam mat nhieu thoi
+	// gian va do on dinh thap, phai maintain nhieu
+	// @Test
+	public void TC_06_Drag_And_Drop_HTML4() {
+		// mo trang test
+		driver.get("https://demos.telerik.com/kendo-ui/dragdrop/angular");
+		// lay ra 2 thang nguon va dich
+		// dung by.id thi lai khong chay duoc
+		WebElement sourceCircle = driver.findElement(By.cssSelector("#draggable"));
+		WebElement targetCircle = driver.findElement(By.cssSelector("#droptarget"));
+		// keo nguon vao dich
+		action.dragAndDrop(sourceCircle, targetCircle).perform();
+
+		// hoac co the lam bang click and hold
+		// action.clickAndHold(sourceCircle).moveToElement(targetCircle).release().perform();
+		sleepInSecond(5);
+		// verify
+		Assert.assertEquals(targetCircle.getText(), "You did great!");
+		sleepInSecond(5);
+	}
+
+	@Test
+	public void TC_07_Drag_And_Drop_HTML5() {
+		// co 2 cach
+		//c1: dung thu vien co san 
+		//ca2 dung toa do
+		// xem tu 46p15 topic 19
+		driver.get("");
 		sleepInSecond(5);
 	}
 // ham nay de xu ly exception. neu pass thi sleep x giay, neu sai thi giu lai exception, chu ko stop cac testcase sau
+
 	public void sleepInSecond(long time) {
 		try {
 			Thread.sleep(time * 1000);
