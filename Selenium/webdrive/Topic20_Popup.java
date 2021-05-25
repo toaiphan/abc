@@ -63,7 +63,7 @@ public class Topic20_Popup {
 		//kiem tra login thanh cong (da hien thi ten cua user)
 		Assert.assertTrue(driver.findElement(By.className("username")).getText().contains("Automation Testing"));
 		
-		sleepInSecond
+		sleepInSecond(10);
 		
 	}
 	@Test
