@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeClass;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -46,13 +47,13 @@ public class Topic18_User_Interaction_Part1 {
 		// verify da vao dc trang home bath ( tu lam dc)
 	}
 
-	@Test
+	// @Test
 	// click and hold (46'47 topic 18)
 	public void TC_02_Click_And_Hold() {
 		driver.get("https://jqueryui.com/resources/demos/selectable/display-grid.html");
-		String [] selectedTextExpected = {"1","2","3","4","5","6","7","8"};
+		String[] selectedTextExpected = { "1", "2", "3", "4", "5", "6", "7", "8" };
 
-		// khai bao list element, moi e element la 1 so(1 o so)
+		// khai bao list element, moi element la 1 so(1 o so)
 		List<WebElement> allItems = driver.findElements(By.xpath("//ol[@id='selectable']/li"));
 
 		// click and hold vao o so 1, move den o so 8, tha chuot ( ham release de tha
@@ -60,30 +61,65 @@ public class Topic18_User_Interaction_Part1 {
 		action.clickAndHold(allItems.get(0)).moveToElement(allItems.get(7)).release().perform();
 
 		// verify chon tu 1 den 8 thanh cong
-		List<WebElement> allItemsSelected = driver.findElements(By.xpath("//ol[@id='selectable']/li[@class='ui-state-default ui-selectee ui-selected']"));
+		List<WebElement> allItemsSelected = driver
+				.findElements(By.xpath("//ol[@id='selectable']/li[@class='ui-state-default ui-selectee ui-selected']"));
 
 		// kiem tra size list co bang 8 hay ko
 		Assert.assertEquals(allItemsSelected.size(), 8);
-		
-		//tao ra 1 array list de luu lai cac text selected
+
+		// tao ra 1 array list de luu lai cac text selected
 		ArrayList<String> allItemsSelectedText = new ArrayList<String>();
 
 		// add tung text vao trong array list
 
 		for (WebElement webElement : allItemsSelected) {
 			allItemsSelectedText.add(webElement.getText());
-			
-			
 
 		}
 		// convert arraylist thanh array, thi moi so sanh dc
-		Object[] selectedTextActual = (Object[])allItemsSelectedText.toArray();
+		Object[] selectedTextActual = (Object[]) allItemsSelectedText.toArray();
 		// so sanh
 		Assert.assertEquals(selectedTextActual, selectedTextExpected);
-		
+
 		sleepInSecond(10);
-		
-		//test may cong ty
+	}
+	// @Test
+
+	// giong nhu kieu ctrl roi chon random
+	public void TC_03_Click_And_Hold_Random() {
+		driver.get("https://jqueryui.com/resources/demos/selectable/display-grid.html");
+
+		// khai bao list element, moi element la 1 so(1 o so)
+		List<WebElement> allItems = driver.findElements(By.xpath("//ol[@id='selectable']/li"));
+		// 1.nhan phim ctrl
+
+		action.keyDown(Keys.CONTROL).perform();
+		// 2.click vao 1 4 7 12
+		action.click(allItems.get(0)).click(allItems.get(3)).click(allItems.get(6)).click(allItems.get(11)).perform();
+		// 3. nha phim ctrl
+		action.keyUp(Keys.CONTROL).perform();
+
+		// verify
+		List<WebElement> allItemsSelected = driver
+				.findElements(By.xpath("//ol[@id='selectable']/li[@class='ui-state-default ui-selectee ui-selected']"));
+		Assert.assertEquals(allItemsSelected.size(), 4);
+
+	}
+
+	@Test
+
+	// click dup
+	public void TC_04_Double_Click() {
+		// mo trang test
+		driver.get("https://automationfc.github.io/basic-form/index.html");
+		// khai bao elemen
+		element = driver.findElement(By.xpath("//button[@ondblclick='doubleClickMe()']"));
+		// click dup vao element
+		action.doubleClick(element).perform();
+
+		// verify
+		Assert.assertTrue(driver.findElement(By.id("demo")).isDisplayed());
+		sleepInSecond(5);
 	}
 
 // ham nay de xu ly exception. neu pass thi sleep x giay, neu sai thi giu lai exception, chu ko stop cac testcase sau
