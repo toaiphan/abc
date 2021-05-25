@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class Topic18_User_Interaction_Part1 {
+public class Topic18_User_Interaction{
 	WebDriver driver;
 	Actions action;
 	WebElement element;
@@ -106,7 +106,7 @@ public class Topic18_User_Interaction_Part1 {
 
 	}
 
-	@Test
+	//@Test
 
 	// click dup
 	public void TC_04_Double_Click() {
@@ -122,6 +122,38 @@ public class Topic18_User_Interaction_Part1 {
 		sleepInSecond(5);
 	}
 
+	
+	@Test
+	public void TC_05_Right_Click() {
+		// mo trang test
+		driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
+		
+		// lay element de click chuot phai
+		element = driver.findElement(By.xpath("//span[text()='right click me']"));
+		
+		// click chuot phai
+		action.contextClick(element).perform();
+		
+		//hover to quit
+		element = driver.findElement(By.xpath("//span[text()='Quit']//parent::li"));
+		action.moveToElement(element).perform();
+		
+		//verify quit co them hover/visible status
+		String quitClassAttribute = element.getAttribute("class");	
+		
+		System.out.println(quitClassAttribute);
+		
+		Assert.assertTrue(quitClassAttribute.contains("context-menu-visible"));
+		Assert.assertTrue(quitClassAttribute.contains("context-menu-hover"));
+		// hoac co the verify bang isdisplay nhu vi du tren
+		
+		
+		
+		
+		
+		
+		sleepInSecond(5);
+	}
 // ham nay de xu ly exception. neu pass thi sleep x giay, neu sai thi giu lai exception, chu ko stop cac testcase sau
 	public void sleepInSecond(long time) {
 		try {
