@@ -178,7 +178,7 @@ public class Topic1819_User_Interaction {
 		// co 2 cach
 		//c1: dung thu vien co san 
 		//ca2 dung toa do
-		// xem tu 46p15 topic 19
+		// xem tu 46p15 topic  19
 		driver.get("");
 		sleepInSecond(5);
 	}
