@@ -82,6 +82,8 @@ public class Topic18_User_Interaction_Part1 {
 		Assert.assertEquals(selectedTextActual, selectedTextExpected);
 		
 		sleepInSecond(10);
+		
+		//test may cong ty
 	}
 
 // ham nay de xu ly exception. neu pass thi sleep x giay, neu sai thi giu lai exception, chu ko stop cac testcase sau
