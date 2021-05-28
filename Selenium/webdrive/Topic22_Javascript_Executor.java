@@ -137,7 +137,7 @@ public class Topic22_Javascript_Executor {
 		jsExecutor.executeScript("window.location = '" + url + "'");
 	}
 
-	public void highlightElement( String locator) {
+	public void highlightElement(String locator) {
 		element = driver.findElement(By.xpath(locator));
 		String originalStyle = element.getAttribute("style");
 		jsExecutor.executeScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, "style",
@@ -162,11 +162,12 @@ public class Topic22_Javascript_Executor {
 		// jsExecutor.executeScript("arguments[0].setAttribute('value', '" + value +
 		// "')", getElement(driver, locator));
 	}
+
 // su dug vi du nhu date birth , bo atribute type="date" de tro thanh binh thuong
 	public void removeAttributeInDOM(String locator, String attributeRemove) {
 		element = driver.findElement(By.xpath(locator));
 
-		jsExecutor.executeScript("arguments[0].removeAttribute('" + attributeRemove + "');",element);
+		jsExecutor.executeScript("arguments[0].removeAttribute('" + attributeRemove + "');", element);
 	}
 
 	public boolean areJQueryAndJSLoadedSuccess(WebDriver driver) {

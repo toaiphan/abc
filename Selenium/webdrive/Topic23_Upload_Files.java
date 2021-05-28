@@ -41,6 +41,7 @@ public class Topic23_Upload_Files {
 	public void TC_01_sendkeys() {
 		driver.get("http://blueimp.github.io/jQuery-File-Upload/");
 		WebElement uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
+		//upload 1 lan 1 file
 		uploadFile.sendKeys(image_01_path);
 		sleepInSecond(1);
 		uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
@@ -48,7 +49,14 @@ public class Topic23_Upload_Files {
 		sleepInSecond(1);
 		uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
 		uploadFile.sendKeys(image_03_path);
-		sleepInSecond(10);
+		sleepInSecond(50);
+		
+		//upload 1 lan nhieu file,ban firefox cu ko ho tro, khong tuong thich version
+		//fail to connect to binary firefox...
+		
+		//uploadFile.sendKeys(image_01_path + "\n" +image_02_path + "\n" + image_03_path + "\n");
+		
+		//verify hinh anh hien thi co the dung javascrip executor
 	}
 	@Test
 	public void TC_02_() {
