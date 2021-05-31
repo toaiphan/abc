@@ -23,7 +23,7 @@ public class Topic26_Wait_Part2_FindElement_Implicit {
 	@BeforeClass
 	public void beforeClass() {
 		driver = new FirefoxDriver();
-		// implicitly (ngam dinh) wait a ham anh huong truc tiep den 2 ham find
+		// implicitly (ngam dinh) wait la ham anh huong truc tiep den 2 ham find
 		// element/s, chi wait cho viec di tim element
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
