@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class Topic24_Wait_Part1_Element_Status {
+public class Topic25_Wait_Part1_Element_Status {
 	WebDriver driver;
 	WebDriverWait explicitWait;
 

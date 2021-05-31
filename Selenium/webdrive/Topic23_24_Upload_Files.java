@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class Topic23_Upload_Files {
+public class Topic23_24_Upload_Files {
 	WebDriver driver;
 	
 	//tao ra duong dan tuong doi, de van chay dc trên máy khác
