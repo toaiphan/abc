@@ -56,7 +56,7 @@ public class Topic25_Wait_Part1_Element_Status {
 	}
 
 	//@Test
-	// : co trong DOM+ co hoac khong hien thi UI +
+	// Presence: co trong DOM+ co hoac khong hien thi UI +
 	public void TC_03_presence() {
 		// th1: co trong dom + hien thi tren giao dien == visible
 		driver.get("https://m.facebook.com/");
@@ -75,7 +75,7 @@ public class Topic25_Wait_Part1_Element_Status {
 	}
 
 	@Test
-	// :k co trong DOM
+	// staleness:k co trong DOM
 	public void TC_04_Staleness() {
 		driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
 		
