@@ -48,8 +48,27 @@ public class Topic28_Wait_Part4_Mixing {
 
 	}
 	//TH2: chi dung implicit wait + khong tim thay element=> cho het timeout cua implicit wait
-
+	//TH3:  implicit 10s, explicit 5s,+ko tim thay element ( chu y apply implicit cho 1 ham su dung explixit )
+	//5s se co exception, 10s moi het timeout
+	//TH4 : implicit 5s, explicit 10s+ ko tim thay element
+	//10s se co exception, 10s moi het timeout 
+	// bao loi 10s hay 5s phu thuoc vao ham explicit vi implicit nam ben trong explicit
+	// => implicit: thoi gian find, explicit thoi gian thow exception, , timeout tong thi lon nhat trong 2
+	
+	//TH5 : chi dung explicit theo locator , time out theo explicit
+	//th6 : chi dung explicit theo webelement, time out la OS neu ko find dc element ( vi ham find element nam o ngoai)
 // ham nay de xu ly exception. neu pass thi sleep x giay, neu sai thi giu lai exception, chu ko stop cac testcase sau
+	
+	// ham try catch, vao try neu xay ra exception se nhay den catch, ma ko chay tiep cac lenh sau, Neu muon thi can try catch tung lenh
+	
+	
+	//nen dung explicit hay implicit
+	//-Nen cung ca 2 loai : 2 thang se cung duoc kich hoat hoac tre hon 1 chut, se chay lau hon nhung chac chan hon
+	// ko co wait nao tot nhat, tuy tung truong hop
+	
+	
+	
+	
 	public void sleepInSecond(long time) {
 		try {
 			Thread.sleep(time * 1000);
