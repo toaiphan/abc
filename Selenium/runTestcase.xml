@@ -1,8 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suite name="Suite" parallel="false">
-  <test name="Test">
-    <classes>
-      <class name="testNG.Topic_01_Annotation"/>
-    </classes>
-  </test> <!-- Test -->
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="phan anh toai" parallel="tests" thread-count="3">
+	<test name="Run on firefox">
+	<paremeter name="browserName" value="firefox"/>
+		<classes>
+			<class name="testNG.Topic30_TestNG_Framework_Part2_Parameter" />
+		</classes>
+	</test> <!-- Test -->
+	
+		<test name="Run on chrome">
+		<paremeter name="browserName" value="chrome"/>
+		<classes>
+			<class name="testNG.Topic30_TestNG_Framework_Part2_Parameter" />
+		</classes>
+	</test> <!-- Test -->
+	
+	
+		<test name="Run on Edge">
+		<paremeter name="browserName" value="edge"/>
+		<classes>
+			<class name="testNG.Topic30_TestNG_Framework_Part2_Parameter" />
+		</classes>
+	</test> <!-- Test -->
 </suite> <!-- Suite -->
+
+
+
+
+<!-- chay nhieu file xml 
+<suite-files>
+<suite-file path="ten file xml 1"/>
+<suite-file path="ten file xml 2"/>
+</suite-files>
+-->
+
+<!-- 
+chay tat ca tc bang package
+<packages>
+<package name="testng"/>
+</packages>
+
+-->

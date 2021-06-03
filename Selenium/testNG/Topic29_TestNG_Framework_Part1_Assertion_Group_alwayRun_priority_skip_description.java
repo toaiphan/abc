@@ -3,7 +3,7 @@ package testNG;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 //2/.assetion
-public class Topic29_TestNG_Framework_Part1_Assertion {
+public class Topic29_TestNG_Framework_Part1_Assertion_Group_alwayRun_priority_skip_description {
 	@Test
 	public void TC_01() {
 		int a = 10;
